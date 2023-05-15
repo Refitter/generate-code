@@ -50,5 +50,8 @@ runs:
           $args = "$args --cancellation-tokens"
         }
         Write-Host "refitter $input $args ${{ inputs.command-args }}"
-        refitter $input $args ${{ inputs.command-args }}
+        Start-Process refitter `
+          -Args $input $args ${{ inputs.command-args }} `          
+          -NoNewWindow `
+          -PassThru
       shell: pwsh
