@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: christianhelle/refitter-action@main
-        name: URI test
+        name: Generate Refit Client
         with:
           openapi-url: https://petstore3.swagger.io/api/v3/openapi.json
           namespace: ChristianHelle.Examples.Petstore.v3
@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: christianhelle/refitter-action@main
-        name: URI test
+        name: Generate Refit Client SDK
         with:
           openapi-url: https://petstore3.swagger.io/api/v3/openapi.json
           namespace: ChristianHelle.Examples.Petstore.v3
