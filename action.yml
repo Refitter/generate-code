@@ -1,5 +1,8 @@
 name: "Generate Refit API Client using Refitter"
 description: "Generates a Refit Client SDK using Refitter from an OpenAPI Specifications file"
+branding:
+  icon: code
+  color: green
 
 inputs:
   openapi-url:
