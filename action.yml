@@ -26,11 +26,26 @@ inputs:
     description: Optional, additional arguments to pass through to Refitter
     required: false
     type: string
-  publish-artifact:
+  publish-artifacts:
     description: Setting this will publish the generated code as C# files
     required: false
     type: boolean
     default: true
+  build-client-sdk:
+    description: Setting this will publish the generated code as a NuGet package
+    required: false
+    type: boolean
+    default: false
+  client-sdk-version:
+    description: The version number used for the NuGet package
+    required: false
+    type: string
+    default: 1.0.${{ github.run_number }}
+  client-sdk-target-framework:
+    description: The target framework used in the Client SDK
+    required: false
+    type: string
+    default: net6.0
 
 runs:
   using: composite
@@ -61,10 +76,45 @@ runs:
         refitter $input $args ${{ inputs.command-args }}
       shell: pwsh
 
-    - name: Publish artifacts
-      if: ${{ inputs.publish-artifact }}
+    - name: Publish Generated Code Artifacts
+      if: ${{ inputs.publish-artifacts }}
       uses: actions/upload-artifact@v2
       with:
         name: Refit Client
         path: |
           **/*.cs
+
+    - name: Generated C# project
+      run: |
+        @"
+        <Project Sdk="Microsoft.NET.Sdk">
+          <PropertyGroup>
+            <TargetFramework>${{ inputs.client-sdk-target-framework }}</TargetFramework>
+            <LangVersion>latest</LangVersion>
+          </PropertyGroup>
+          <ItemGroup>
+            <PackageReference Include="Refit" Version="6.3.2" />
+            <PackageReference Include = "Newtonsoft.Json" Version="13.0.1" />
+            <PackageReference Include = "System.ComponentModel.Annotations" Version="4.5.0" />
+            <PackageReference Include = "System.Runtime.Serialization.Primitives" Version="4.3.0" />
+          </ItemGroup>
+        </Project>
+        " | Out-File Build.csproj
+        Get-Content Build.csproj | Write-Host
+      shell: pwsh
+
+    - name: Build
+      run: dotnet build -c Release /p:UseSourceLink=true -p:PackageVersion="${{ inputs.client-sdk-version }}"
+      workking-directory: src
+
+    - name: Pack
+      run: dotnet pack --no-build -c Release /p:UseSourceLink=true -p:PackageVersion="${{ inputs.client-sdk-version }}"
+      workking-directory: src
+
+    - name: Publish Client SDK Artifact
+      if: ${{ inputs.build-client-sdk }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: Refit Client SDK
+        path: |
+          **/*.nupkg
