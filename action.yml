@@ -123,7 +123,7 @@ runs:
         path: Output.cs
 
     - name: Generated C# project
-      if: ${{ inputs.client-sdk }} == 'true'
+      if: ${{ inputs.client-sdk == true }}
       run: |
         @'
         <Project Sdk="Microsoft.NET.Sdk">
@@ -160,17 +160,17 @@ runs:
       shell: pwsh
 
     - name: Build
-      if: ${{ inputs.client-sdk }} == 'true'
+      if: ${{ inputs.client-sdk == true }}
       run: dotnet build -c Release /p:UseSourceLink=true -p:PackageVersion="${{ inputs.client-sdk-version }}"
       shell: pwsh
 
     - name: Pack
-      if: ${{ inputs.client-sdk }} == 'true'
+      if: ${{ inputs.client-sdk == true }}
       run: dotnet pack --no-build -c Release /p:UseSourceLink=true -p:PackageVersion="${{ inputs.client-sdk-version }}" --output .
       shell: pwsh
 
     - name: Publish Client SDK Artifact
-      if: ${{ inputs.client-sdk }} == 'true'
+      if: ${{ inputs.client-sdk == true }}
       uses: actions/upload-artifact@v3
       with:
         name: Refit Client SDK (NuGet)
