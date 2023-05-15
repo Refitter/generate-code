@@ -100,7 +100,7 @@ runs:
             <PackageReference Include = ""System.Runtime.Serialization.Primitives"" Version=""4.3.0"" />
           </ItemGroup>
         </Project>
-        " | Out-File Build.csproj
+        "@ | Out-File Build.csproj
         Get-Content Build.csproj | Write-Host
       shell: pwsh
 
