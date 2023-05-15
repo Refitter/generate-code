@@ -45,12 +45,9 @@ runs:
         if (${{ inputs.use-api-response }}) {
           $args = "$args --use-api-response"
         }
-        if (${{ inputs.cancellation-tokens }}) {
+        if (${{ inputs.cancellation-tokens }} -eq ) {
           $args = "$args --cancellation-tokens"
         }
-        if (${{ inputs.command-args }}) {
-          $args = "$args ${{ inputs.command-args }}"
-        }
-        Write-Host "refitter $input $args"
-        refitter $input $args
+        Write-Host "refitter $input $args ${{ inputs.command-args }}"
+        refitter $input $args ${{ inputs.command-args }}
       shell: pwsh
