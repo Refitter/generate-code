@@ -100,7 +100,7 @@ runs:
         }
         $args = ""
         if ("${{ inputs.namespace }}") {
-          $args = "$args --namespace '${{ inputs.namespace }}'"
+          $args = "$args --namespace ${{ inputs.namespace }}"
         }
         if ($${{ inputs.use-api-response }}) {
           $args = "$args --use-api-response"
