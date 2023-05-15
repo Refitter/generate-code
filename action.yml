@@ -105,11 +105,11 @@ runs:
 
     - name: Build
       run: dotnet build -c Release /p:UseSourceLink=true -p:PackageVersion="${{ inputs.client-sdk-version }}"
-      workking-directory: src
+      shell: pwsh
 
     - name: Pack
       run: dotnet pack --no-build -c Release /p:UseSourceLink=true -p:PackageVersion="${{ inputs.client-sdk-version }}"
-      workking-directory: src
+      shell: pwsh
 
     - name: Publish Client SDK Artifact
       if: ${{ inputs.build-client-sdk }}
