@@ -78,7 +78,7 @@ runs:
 
     - name: Publish Generated Code Artifacts
       if: ${{ inputs.publish-artifacts }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Refit Client
         path: |
@@ -111,12 +111,12 @@ runs:
 
     - name: Pack
       if: ${{ inputs.build-client-sdk }}
-      run: dotnet pack --no-build -c Release /p:UseSourceLink=true -p:PackageVersion="${{ inputs.client-sdk-version }}"
+      run: dotnet pack --no-build -c Release /p:UseSourceLink=true -p:PackageVersion="${{ inputs.client-sdk-version }}" --output .
       shell: pwsh
 
     - name: Publish Client SDK Artifact
       if: ${{ inputs.build-client-sdk }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Refit Client SDK
         path: |
