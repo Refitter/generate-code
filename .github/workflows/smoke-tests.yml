@@ -17,3 +17,16 @@ jobs:
           command-args: --no-logging
       - run: Get-Content Output.cs | Write-Host
         shell: pwsh
+        
+  smoke-test-url-with-client-sdk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: christianhelle/refitter-action@main
+        name: URI test
+        with:
+          openapi-url: https://petstore3.swagger.io/api/v3/openapi.json
+          command-args: --no-logging
+          build-client-sdk: true
+      - run: Get-Content Output.cs | Write-Host
+        shell: pwsh
