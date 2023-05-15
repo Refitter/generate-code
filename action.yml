@@ -80,7 +80,7 @@ runs:
       if: ${{ inputs.publish-artifacts }}
       uses: actions/upload-artifact@v3
       with:
-        name: Refit Client
+        name: Refit C# Client Code
         path: |
           **/*.cs
 
@@ -118,6 +118,6 @@ runs:
       if: ${{ inputs.build-client-sdk }}
       uses: actions/upload-artifact@v3
       with:
-        name: Refit Client SDK
+        name: Refit Client SDK (NuGet)
         path: |
           **/*.nupkg
