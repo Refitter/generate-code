@@ -28,5 +28,6 @@ jobs:
           openapi-url: https://petstore3.swagger.io/api/v3/openapi.json
           command-args: --no-logging
           build-client-sdk: true
+          client-sdk-version: 1.0.${{ github.run_number }}
       - run: Get-Content Output.cs | Write-Host
         shell: pwsh
