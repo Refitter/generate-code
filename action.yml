@@ -31,7 +31,7 @@ inputs:
     required: false
     type: boolean
     default: true
-  build-client-sdk:
+  client-sdk:
     description: Setting this will publish the generated code as a NuGet package
     required: false
     type: boolean
