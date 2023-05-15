@@ -38,9 +38,9 @@ runs:
       run: |
         $input = ""
         if ("${{ inputs.openapi-url }}") {
-          $input = ${{ inputs.openapi-url }}
+          $input = "${{ inputs.openapi-url }}"
         } else {
-          $input = ${{ inputs.openapi-file }}
+          $input = "${{ inputs.openapi-file }}"
         }
         $args = "--namespace ${{ inputs.namespace }} --output ApiClient.cs"
         if ($${{ inputs.use-api-response }}) {
@@ -50,8 +50,5 @@ runs:
           $args = "$args --cancellation-tokens"
         }
         Write-Host "refitter $input $args ${{ inputs.command-args }}"
-        Start-Process refitter `
-          -Args $input $args ${{ inputs.command-args }} `          
-          -NoNewWindow `
-          -PassThru
+        refitter $input $args ${{ inputs.command-args }}
       shell: pwsh
