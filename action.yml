@@ -36,16 +36,19 @@ runs:
 
     - name: Generate Client Interface
       run: |
-        $args = "--namespace '${{ inputs.namespace }}'"
+        $input = ""
+        if ("${{ inputs.openapi-url }}") {
+          $input = ${{ inputs.openapi-url }}
+        } else {
+          $input = ${{ inputs.openapi-file }}
+        }
+        $args = "--namespace ${{ inputs.namespace }} --output ApiClient.cs"
         if ($${{ inputs.use-api-response }}) {
           $args = "$args --use-api-response"
         }
         if ($${{ inputs.cancellation-tokens }}) {
           $args = "$args --cancellation-tokens"
         }
-        if ("${{ inputs.openapi-url }}") {
-          refitter ${{ inputs.openapi-url }} $args ${{ inputs.command-args }}
-        } else {
-          refitter ${{ inputs.openapi-file }} $args ${{ inputs.command-args }}
-        }
+        Write-Host "refitter $input $args ${{ inputs.command-args }}"
+        refitter $input $args ${{ inputs.command-args }}
       shell: pwsh
