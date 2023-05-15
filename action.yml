@@ -1,0 +1,55 @@
+name: "Generate Refit Client SDK using Refitter"
+description: "Generates a Refit Client SDK using Refitter from an OpenAPI Specifications file"
+
+inputs:
+  openapi-url:
+    description: If set, the OpenAPI document will be loaded from this URL instead of openapi-file.
+    required: false
+    default: UNSET
+  openapi-file:
+    description: The path to the OpenAPI document to generate a client library for
+    required: false
+    default: openapi.json
+  namespace:
+    description: The default namespace used for the generated types
+    required: false   
+  use-api-response:
+    description: Return Task<IApiResponse<T>> instead of Task<T>
+    required: false
+    default: UNSET
+  cancellation-tokens:
+    description: Use cancellation tokens
+    required: false
+    default: UNSET
+  command-args:
+    description: Optional, additional arguments to pass through to Refitter
+    required: false
+    default: UNSET
+
+runs:
+  using: composite
+  steps:
+    - name: Install Refitter
+      run: dotnet tool install --global refitter; refitter
+
+    - name: Generate Client Interface
+      shell: pwsh
+      run: |
+        $input = ""
+        if (${{ inputs.openapi-url }}) {
+          $input = ${{ inputs.openapi-url }}
+        } else {
+          $input = ${{ inputs.openapi-file }}
+        }
+        $args = "--namespace ${{ inputs.namespace }} --output ApiClient.cs"
+        if (${{ inputs.use-api-response }}) {
+          $args = "$args --use-api-response"
+        }
+        if (${{ inputs.cancellation-tokens }}) {
+          $args = "$args --cancellation-tokens"
+        }
+        if (${{ inputs.command-args }}) {
+          $args = "$args ${{ inputs.command-args }}"
+        }
+        Write-Host "refitter $input $args"
+        refitter $input $args
