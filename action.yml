@@ -120,8 +120,7 @@ runs:
       uses: actions/upload-artifact@v3
       with:
         name: Refit C# Client Code
-        path: |
-          **/*.cs
+        path: Output.cs
 
     - name: Generated C# project
       if: ${{ inputs.build-client-sdk }}
