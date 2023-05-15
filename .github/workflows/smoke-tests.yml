@@ -1,0 +1,16 @@
+name: Smoke Tests
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  smoke-test-url:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: christianhelle/refitter-action@v1
+        name: URI test
+        with:
+          openapi-url: https://petstore3.swagger.io/api/v3/openapi.json
+          command-args: --no-logging
