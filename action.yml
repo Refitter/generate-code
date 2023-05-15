@@ -85,6 +85,7 @@ runs:
           **/*.cs
 
     - name: Generated C# project
+      if: ${{ inputs.build-client-sdk }}
       run: |
         @"
         <Project Sdk="Microsoft.NET.Sdk">
@@ -104,10 +105,12 @@ runs:
       shell: pwsh
 
     - name: Build
+      if: ${{ inputs.build-client-sdk }}
       run: dotnet build -c Release /p:UseSourceLink=true -p:PackageVersion="${{ inputs.client-sdk-version }}"
       shell: pwsh
 
     - name: Pack
+      if: ${{ inputs.build-client-sdk }}
       run: dotnet pack --no-build -c Release /p:UseSourceLink=true -p:PackageVersion="${{ inputs.client-sdk-version }}"
       shell: pwsh
 
