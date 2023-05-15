@@ -26,6 +26,11 @@ inputs:
     description: Optional, additional arguments to pass through to Refitter
     required: false
     type: string
+  publish-artifact:
+    description: Setting this will publish the generated code as C# files
+    required: false
+    type: boolean
+    default: true
 
 runs:
   using: composite
@@ -55,3 +60,11 @@ runs:
         Write-Host "refitter $input $args ${{ inputs.command-args }}"
         refitter $input $args ${{ inputs.command-args }}
       shell: pwsh
+
+    - name: Publish artifacts
+      if: ${{ inputs.publish-artifact }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: Refit Client
+        path: |
+          **/*.cs
