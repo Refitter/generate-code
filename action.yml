@@ -42,7 +42,10 @@ runs:
         } else {
           $input = "${{ inputs.openapi-file }}"
         }
-        $args = "--namespace ${{ inputs.namespace }} --output ApiClient.cs"
+        $args = ""
+        if ("${{ inputs.namespace }}") {
+          $args = "$args --namespace ""${{ inputs.namespace }}"""
+        }
         if ($${{ inputs.use-api-response }}) {
           $args = "$args --use-api-response"
         }
