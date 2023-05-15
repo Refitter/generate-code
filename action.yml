@@ -46,6 +46,42 @@ inputs:
     required: false
     type: string
     default: net6.0
+  client-sdk-package-id:
+    required: false
+    type: string
+  client-sdk-title:
+    required: false
+    type: string
+  client-sdk-root-namespace:
+    required: false
+    type: string
+  client-sdk-assembly:
+    required: false
+    type: string
+  client-sdk-authors:
+    required: false
+    type: string
+  client-sdk-product:
+    required: false
+    type: string
+  client-sdk-company:
+    required: false
+    type: string
+  client-sdk-description:
+    required: false
+    type: string
+  client-sdk-project-url:
+    required: false
+    type: string
+  client-sdk-license:
+    required: false
+    type: string
+    default: GPL-3.0-only
+  client-sdk-repository-type:
+    required: false
+    type: string
+    default: git
+    
 
 runs:
   using: composite
@@ -92,6 +128,23 @@ runs:
           <PropertyGroup>
             <TargetFramework>${{ inputs.client-sdk-target-framework }}</TargetFramework>
             <LangVersion>latest</LangVersion>
+            <Nullable>enable</Nullable>
+            <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+            <Authors>${{ inputs.client-sdk-authors }}</Authors>
+            <Product>${{ inputs.client-sdk-product }}</Product>
+            <PackageId>${{ inputs.client-sdk-package-id }}</PackageId>
+            <AssemblyName>${{ inputs.client-sdk-assembly }}</AssemblyName>
+            <Company>${{ inputs.client-sdk-company }}</Company>
+            <Description>${{ inputs.client-sdk-description }}</Description>
+            <PackageLicenseExpression>${{ inputs.client-sdk-license }}</PackageLicenseExpression>
+            <PackageProjectUrl>${{ inputs.client-sdk-project-url }}</PackageProjectUrl>
+            <RepositoryUrl>${{ inputs.client-sdk-project-url }}</RepositoryUrl>
+            <RepositoryType>${{ inputs.client-sdk-repository-type }}</RepositoryType>
+            <PublishRepositoryUrl>true</PublishRepositoryUrl>
+            <DebugType>embedded</DebugType>
+            <EmbedUntrackedSources>true</EmbedUntrackedSources>
+            <IsPackable>true</IsPackable>
+            <TieredCompilation>true</TieredCompilation>
           </PropertyGroup>
           <ItemGroup>
             <PackageReference Include="Refit" Version="6.3.2" />

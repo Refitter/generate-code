@@ -31,5 +31,15 @@ jobs:
           command-args: --no-logging
           client-sdk: true
           client-sdk-version: 1.0.${{ github.run_number }}
+          client-sdk-package-id: ChristianHelle.Examples.Petstore
+          client-sdk-title: ChristianHelle.Examples.Petstore.v3
+          client-sdk-root-namespace: ChristianHelle.Examples.Petstore.v3
+          client-sdk-root-assembly: ChristianHelle.Examples.Petstore.v3
+          client-sdk-product: ChristianHelle.Examples.Petstore
+          client-sdk-root-authors: Christian Resma Helle
+          client-sdk-root-company: Christian Resma Helle
+          client-sdk-root-description: Example generated code using Refitter and the Swagger Petstore v3 example OpenAPI specifications
+          client-sdk-project-url: https://github.com/christianhelle/refitter-action
+
       - run: Get-Content Output.cs | Write-Host
         shell: pwsh
