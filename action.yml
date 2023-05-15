@@ -46,7 +46,7 @@ runs:
         if ($${{ inputs.use-api-response }}) {
           $args = "$args --use-api-response"
         }
-        if ($${{ inputs.cancellation-tokens }} -eq ) {
+        if ($${{ inputs.cancellation-tokens }}) {
           $args = "$args --cancellation-tokens"
         }
         Write-Host "refitter $input $args ${{ inputs.command-args }}"
