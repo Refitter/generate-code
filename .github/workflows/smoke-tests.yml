@@ -1,9 +1,17 @@
 name: Smoke Tests
 
 on:
-  - push
-  - pull_request
-  - workflow_dispatch
+  workflow_dispatch:
+  push:
+    paths-ignore:
+      - '**/*'      
+      - '!action.yml'
+      - '!.github/workflows/smoke-tests.yml'
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
 
 jobs:
   smoke-test-url:
