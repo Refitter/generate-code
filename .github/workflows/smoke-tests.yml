@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: christianhelle/refitter-action@v1
+      - uses: christianhelle/refitter-action@latest
         name: URI test
         with:
           openapi-url: https://petstore3.swagger.io/api/v3/openapi.json

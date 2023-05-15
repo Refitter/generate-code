@@ -5,7 +5,6 @@ inputs:
   openapi-url:
     description: If set, the OpenAPI document will be loaded from this URL instead of openapi-file.
     required: false
-    default: UNSET
   openapi-file:
     description: The path to the OpenAPI document to generate a client library for
     required: false
@@ -16,15 +15,17 @@ inputs:
   use-api-response:
     description: Return Task<IApiResponse<T>> instead of Task<T>
     required: false
-    default: UNSET
+    default: false
+    type: boolean
   cancellation-tokens:
     description: Use cancellation tokens
     required: false
-    default: UNSET
+    default: false
+    type: boolean
   command-args:
     description: Optional, additional arguments to pass through to Refitter
     required: false
-    default: UNSET
+    type: string
 
 runs:
   using: composite
@@ -36,16 +37,16 @@ runs:
     - name: Generate Client Interface
       run: |
         $input = ""
-        if (${{ inputs.openapi-url }}) {
+        if ("${{ inputs.openapi-url }}") {
           $input = ${{ inputs.openapi-url }}
         } else {
           $input = ${{ inputs.openapi-file }}
         }
         $args = "--namespace ${{ inputs.namespace }} --output ApiClient.cs"
-        if (${{ inputs.use-api-response }}) {
+        if ($${{ inputs.use-api-response }}) {
           $args = "$args --use-api-response"
         }
-        if (${{ inputs.cancellation-tokens }} -eq ) {
+        if ($${{ inputs.cancellation-tokens }} -eq ) {
           $args = "$args --cancellation-tokens"
         }
         Write-Host "refitter $input $args ${{ inputs.command-args }}"
