@@ -30,6 +30,7 @@ runs:
   using: composite
   steps:
     - name: Install Refitter
+      shell: pwsh
       run: dotnet tool install --global refitter; refitter
 
     - name: Generate Client Interface
