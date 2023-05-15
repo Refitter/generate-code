@@ -30,11 +30,10 @@ runs:
   using: composite
   steps:
     - name: Install Refitter
-      shell: pwsh
       run: dotnet tool install --global refitter; refitter
+      shell: pwsh
 
     - name: Generate Client Interface
-      shell: pwsh
       run: |
         $input = ""
         if (${{ inputs.openapi-url }}) {
@@ -54,3 +53,4 @@ runs:
         }
         Write-Host "refitter $input $args"
         refitter $input $args
+      shell: pwsh
