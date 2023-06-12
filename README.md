@@ -96,8 +96,4 @@ jobs:
           client-sdk-company: Christian Resma Helle
           client-sdk-description: Example generated code using Refitter and the Swagger Petstore v3 example OpenAPI specifications
           client-sdk-project-url: https://github.com/christianhelle/refitter-action
-      
-      # Do something with the generated client (like include it in an existing project)
-      - run: Get-Content Output.cs | Write-Host
-        shell: pwsh
 ```
