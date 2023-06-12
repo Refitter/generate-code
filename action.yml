@@ -115,7 +115,8 @@ runs:
         Start-Process refitter `
           -Args "$input $args ${{ inputs.command-args }}" `
           -NoNewWindow `
-          -PassThru
+          -PassThru `
+          -Wait
       shell: pwsh
 
     - name: Publish Generated Code Artifacts
