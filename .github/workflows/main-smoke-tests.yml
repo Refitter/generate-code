@@ -12,6 +12,8 @@ on:
   pull_request:
     branches:
       - 'main'
+  schedule:
+    - cron: "*/60 * * * *"
 
 jobs:
   smoke-test-url:
