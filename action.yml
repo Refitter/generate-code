@@ -1,5 +1,5 @@
 name: "Generate Refit API Client using Refitter"
-description: "Generates a Refit Client SDK using Refitter from an OpenAPI Specifications file"
+description: "Generates a C# Refit interface using Refitter from an OpenAPI Specifications file or URL"
 branding:
   icon: code
   color: green
@@ -34,56 +34,6 @@ inputs:
     required: false
     type: boolean
     default: true
-  client-sdk:
-    description: Setting this will publish the generated code as a NuGet package
-    required: false
-    type: boolean
-    default: false
-  client-sdk-version:
-    description: The version number used for the NuGet package
-    required: false
-    type: string
-    default: 1.0.${{ github.run_number }}
-  client-sdk-target-framework:
-    description: The target framework used in the Client SDK
-    required: false
-    type: string
-    default: net6.0
-  client-sdk-package-id:
-    required: false
-    type: string
-  client-sdk-title:
-    required: false
-    type: string
-  client-sdk-root-namespace:
-    required: false
-    type: string
-  client-sdk-assembly:
-    required: false
-    type: string
-  client-sdk-authors:
-    required: false
-    type: string
-  client-sdk-product:
-    required: false
-    type: string
-  client-sdk-company:
-    required: false
-    type: string
-  client-sdk-description:
-    required: false
-    type: string
-  client-sdk-project-url:
-    required: false
-    type: string
-  client-sdk-license:
-    required: false
-    type: string
-    default: GPL-3.0-only
-  client-sdk-repository-type:
-    required: false
-    type: string
-    default: git
     
 
 runs:
@@ -125,58 +75,3 @@ runs:
       with:
         name: Refit C# Client Code
         path: Output.cs
-
-    - name: Generated C# project
-      if: ${{ inputs.client-sdk == 'true' }}
-      run: |
-        @'
-        <Project Sdk="Microsoft.NET.Sdk">
-          <PropertyGroup>
-            <TargetFramework>${{ inputs.client-sdk-target-framework }}</TargetFramework>
-            <LangVersion>latest</LangVersion>
-            <Nullable>enable</Nullable>
-            <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-            <Authors>${{ inputs.client-sdk-authors }}</Authors>
-            <Product>${{ inputs.client-sdk-product }}</Product>
-            <PackageId>${{ inputs.client-sdk-package-id }}</PackageId>
-            <AssemblyName>${{ inputs.client-sdk-assembly }}</AssemblyName>
-            <Company>${{ inputs.client-sdk-company }}</Company>
-            <Description>${{ inputs.client-sdk-description }}</Description>
-            <PackageLicenseExpression>${{ inputs.client-sdk-license }}</PackageLicenseExpression>
-            <PackageProjectUrl>${{ inputs.client-sdk-project-url }}</PackageProjectUrl>
-            <RepositoryUrl>${{ inputs.client-sdk-project-url }}</RepositoryUrl>
-            <RepositoryType>${{ inputs.client-sdk-repository-type }}</RepositoryType>
-            <PublishRepositoryUrl>true</PublishRepositoryUrl>
-            <DebugType>embedded</DebugType>
-            <EmbedUntrackedSources>true</EmbedUntrackedSources>
-            <IsPackable>true</IsPackable>
-            <TieredCompilation>true</TieredCompilation>
-          </PropertyGroup>
-          <ItemGroup>
-            <PackageReference Include="Refit" Version="6.3.2" />
-            <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-            <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
-            <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
-          </ItemGroup>
-        </Project>
-        '@ | Out-File Build.csproj
-        Get-Content Build.csproj | Write-Host
-      shell: pwsh
-
-    - name: Build
-      if: ${{ inputs.client-sdk == 'true' }}
-      run: dotnet build -c Release /p:UseSourceLink=true -p:PackageVersion="${{ inputs.client-sdk-version }}"
-      shell: pwsh
-
-    - name: Pack
-      if: ${{ inputs.client-sdk == 'true' }}
-      run: dotnet pack --no-build -c Release /p:UseSourceLink=true -p:PackageVersion="${{ inputs.client-sdk-version }}" --output .
-      shell: pwsh
-
-    - name: Publish Client SDK Artifact
-      if: ${{ inputs.client-sdk == 'true' }}
-      uses: actions/upload-artifact@v3
-      with:
-        name: Refit Client SDK (NuGet)
-        path: |
-          **/*.nupkg
