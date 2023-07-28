@@ -1,5 +1,5 @@
-# Refitter Github Action
-Generate a Refit client interface and contracts from an OpenAPI specifications document using [Refitter](https://github.com/christianhelle/refitter).
+# Generate-Code
+Generate a C# Refit client interface and contracts from an OpenAPI specifications document using [Refitter](https://github.com/christianhelle/refitter).
 
 ## Inputs
 
