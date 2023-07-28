@@ -1,4 +1,4 @@
-name: "Generate Refit API Client using Refitter"
+name: "Generate C# Refit interface using Refitter"
 description: "Generates a C# Refit interface using Refitter from an OpenAPI Specifications file or URL"
 branding:
   icon: code
