@@ -44,7 +44,7 @@ jobs:
       
       # Use the action to generate a Refit client interface from a file
       # This produces a file called Output.cs as a build artifact
-      - uses: refitter/generate-code@main
+      - uses: refitter/generate-code@v1
         name: Generate Refit Client
         with:        
           openapi-file: openapi.json
@@ -67,7 +67,7 @@ jobs:
 
       # Use the action to generate a Refit client interface from a URL
       # This produces a file called OutputFromUrl.cs as a build artifact
-      - uses: refitter/generate-code@main
+      - uses: refitter/generate-code@v1
         name: Generate Refit Client
         with:
           openapi-url: https://petstore3.swagger.io/api/v3/openapi.json
