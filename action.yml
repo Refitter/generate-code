@@ -52,22 +52,22 @@ runs:
     - name: Generate Client Interface
       run: |
         $input = ""
-        if ($${{ inputs.openapi-url }}) {
+        if ("${{ inputs.openapi-url }}") {
           $input = "${{ inputs.openapi-url }}"
         } else {
           $input = "${{ inputs.openapi-file }}"
         }
         $args = ""
-        if ($${{ inputs.namespace }}) {
+        if ("${{ inputs.namespace }}") {
           $args = "$args --namespace ${{ inputs.namespace }}"
         }
-        if ($${{ inputs.use-api-response }}) {
+        if ("${{ inputs.use-api-response }}") {
           $args = "$args --use-api-response"
         }
-        if ($${{ inputs.cancellation-tokens }}) {
+        if ("${{ inputs.cancellation-tokens }}") {
           $args = "$args --cancellation-tokens"
         }
-        if ($${{ inputs.multiple-interfaces }}) {
+        if ("${{ inputs.multiple-interfaces }}") {
           $args = "$args --multiple-interfaces ${{ inputs.multiple-interfaces }}"
         }
         Write-Host "refitter $input $args ${{ inputs.command-args }}"
