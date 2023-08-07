@@ -88,4 +88,4 @@ runs:
       uses: actions/upload-artifact@v3
       with:
         name: Refit C# Client Code
-        path: Output.cs
+        path: ${{ inputs.output-filename }}
