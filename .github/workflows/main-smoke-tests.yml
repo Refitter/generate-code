@@ -27,7 +27,8 @@ jobs:
           openapi-url: https://petstore3.swagger.io/api/v3/openapi.json
           namespace: ChristianHelle.Examples.Petstore.v3
           command-args: --no-logging
-      - run: Get-Content Output.cs | Write-Host
+          output-filename: OutputFromUrl.cs
+      - run: Get-Content OutputFromUrl.cs | Write-Host
         shell: pwsh
 
   smoke-test-url-multiple-interfaces-byendpoint:
@@ -42,7 +43,8 @@ jobs:
           namespace: ChristianHelle.Examples.Petstore.v3          
           multiple-interfaces: ByEndpoint
           command-args: --no-logging
-      - run: Get-Content Output.cs | Write-Host
+          output-filename: OutputFromUrlByEndpoint.cs
+      - run: Get-Content OutputFromUrlByEndpoint.cs | Write-Host
         shell: pwsh
 
   smoke-test-url-multiple-interfaces-bytag:
@@ -57,5 +59,6 @@ jobs:
           namespace: ChristianHelle.Examples.Petstore.v3          
           multiple-interfaces: ByTag
           command-args: --no-logging
-      - run: Get-Content Output.cs | Write-Host
+          output-filename: OutputFromUrlByTag.cs
+      - run: Get-Content OutputFromUrlByTag.cs | Write-Host
         shell: pwsh
