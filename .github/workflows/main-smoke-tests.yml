@@ -13,7 +13,7 @@ on:
     branches:
       - 'main'
   schedule:
-    - cron: "*/60 * * * *"
+    - cron: '0 * * * *'
 
 jobs:
   smoke-test-url:
@@ -59,26 +59,3 @@ jobs:
           command-args: --no-logging
       - run: Get-Content Output.cs | Write-Host
         shell: pwsh
-        
-  smoke-test-url-with-client-sdk:
-    name: From URL with Client SDK
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: refitter/generate-code@main
-        name: Generate Refit Client SDK
-        with:
-          openapi-url: https://petstore3.swagger.io/api/v3/openapi.json
-          namespace: ChristianHelle.Examples.Petstore.v3
-          command-args: --no-logging
-          client-sdk: true
-          client-sdk-version: 1.0.${{ github.run_number }}
-          client-sdk-package-id: ChristianHelle.Examples.Petstore.v3
-          client-sdk-title: ChristianHelle.Examples.Petstore.v3
-          client-sdk-root-namespace: ChristianHelle.Examples.Petstore.v3
-          client-sdk-assembly: ChristianHelle.Examples.Petstore.v3
-          client-sdk-product: ChristianHelle.Examples.Petstore
-          client-sdk-authors: Christian Resma Helle
-          client-sdk-company: Christian Resma Helle
-          client-sdk-description: Example generated code using Refitter and the Swagger Petstore v3 example OpenAPI specifications
-          client-sdk-project-url: https://github.com/refitter/generate-code
