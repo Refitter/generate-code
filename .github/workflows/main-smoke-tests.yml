@@ -31,7 +31,7 @@ jobs:
         shell: pwsh
 
   smoke-test-url-multiple-interfaces-byendpoint:
-    name: From URL
+    name: From URL with multple interfaces by endpoint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -46,7 +46,7 @@ jobs:
         shell: pwsh
 
   smoke-test-url-multiple-interfaces-bytag:
-    name: From URL
+    name: From URL with multple interfaces by tag
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
