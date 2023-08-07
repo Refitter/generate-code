@@ -52,13 +52,13 @@ runs:
     - name: Generate Client Interface
       run: |
         $input = ""
-        if ("${{ inputs.openapi-url }}") {
+        if ($${{ inputs.openapi-url }}) {
           $input = "${{ inputs.openapi-url }}"
         } else {
           $input = "${{ inputs.openapi-file }}"
         }
         $args = ""
-        if ("${{ inputs.namespace }}") {
+        if ($${{ inputs.namespace }}) {
           $args = "$args --namespace ${{ inputs.namespace }}"
         }
         if ($${{ inputs.use-api-response }}) {
