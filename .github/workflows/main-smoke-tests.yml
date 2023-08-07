@@ -6,7 +6,7 @@ on:
     paths-ignore:
       - '**/*'      
       - '!action.yml'
-      - '!.github/workflows/smoke-tests.yml'
+      - '!.github/workflows/main-smoke-tests.yml'
     branches:
       - 'main'
   pull_request:
