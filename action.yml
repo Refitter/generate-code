@@ -40,6 +40,11 @@ inputs:
     required: false
     type: boolean
     default: false
+  output-filename:
+    description: Generated output filename
+    required: false
+    type: string
+    default: Output.cs
     
 
 runs:
@@ -72,7 +77,7 @@ runs:
         }
         Write-Host "refitter $input $args ${{ inputs.command-args }}"
         Start-Process refitter `
-          -Args "$input $args ${{ inputs.command-args }}" `
+          -Args "$input $args ${{ inputs.command-args }} --output ${{ inputs.output-filename }}" `
           -NoNewWindow `
           -PassThru `
           -Wait
