@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: christianhelle/refitter-action@main
+      - uses: refitter/generate-code@main
         name: Generate Refit Client
         with:
           openapi-url: https://petstore3.swagger.io/api/v3/openapi.json
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: christianhelle/refitter-action@main
+      - uses: refitter/generate-code@main
         name: Generate Refit Client
         with:
           openapi-url: https://petstore3.swagger.io/api/v3/openapi.json
@@ -50,7 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: christianhelle/refitter-action@main
+      - uses: refitter/generate-code@main
         name: Generate Refit Client
         with:
           openapi-url: https://petstore3.swagger.io/api/v3/openapi.json
@@ -65,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: christianhelle/refitter-action@main
+      - uses: refitter/generate-code@main
         name: Generate Refit Client SDK
         with:
           openapi-url: https://petstore3.swagger.io/api/v3/openapi.json
@@ -81,4 +81,4 @@ jobs:
           client-sdk-authors: Christian Resma Helle
           client-sdk-company: Christian Resma Helle
           client-sdk-description: Example generated code using Refitter and the Swagger Petstore v3 example OpenAPI specifications
-          client-sdk-project-url: https://github.com/christianhelle/refitter-action
+          client-sdk-project-url: https://github.com/refitter/generate-code
