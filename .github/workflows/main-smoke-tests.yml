@@ -29,6 +29,36 @@ jobs:
           command-args: --no-logging
       - run: Get-Content Output.cs | Write-Host
         shell: pwsh
+
+  smoke-test-url-multiple-interfaces-byendpoint:
+    name: From URL
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: christianhelle/refitter-action@main
+        name: Generate Refit Client
+        with:
+          openapi-url: https://petstore3.swagger.io/api/v3/openapi.json
+          namespace: ChristianHelle.Examples.Petstore.v3          
+          multiple-interfaces: ByEndpoint
+          command-args: --no-logging
+      - run: Get-Content Output.cs | Write-Host
+        shell: pwsh
+
+  smoke-test-url-multiple-interfaces-bytag:
+    name: From URL
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: christianhelle/refitter-action@main
+        name: Generate Refit Client
+        with:
+          openapi-url: https://petstore3.swagger.io/api/v3/openapi.json
+          namespace: ChristianHelle.Examples.Petstore.v3          
+          multiple-interfaces: ByTag
+          command-args: --no-logging
+      - run: Get-Content Output.cs | Write-Host
+        shell: pwsh
         
   smoke-test-url-with-client-sdk:
     name: From URL with Client SDK

@@ -25,6 +25,12 @@ inputs:
     required: false
     default: false
     type: boolean
+  multiple-interfaces:
+    type: choice
+    description: Generate a Refit interface for each endpoint. May be one of ByEndpoint, ByTag
+    options:
+    - ByEndpoint
+    - ByTag
   command-args:
     description: Optional, additional arguments to pass through to Refitter
     required: false
@@ -33,7 +39,7 @@ inputs:
     description: Setting this will publish the generated code as C# files
     required: false
     type: boolean
-    default: true
+    default: false
     
 
 runs:
@@ -60,6 +66,9 @@ runs:
         }
         if ($${{ inputs.cancellation-tokens }}) {
           $args = "$args --cancellation-tokens"
+        }
+        if ($${{ inputs.multiple-interfaces }}) {
+          $args = "$args --multiple-interfaces ${{ inputs.multiple-interfaces }}"
         }
         Write-Host "refitter $input $args ${{ inputs.command-args }}"
         Start-Process refitter `
